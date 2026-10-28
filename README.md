@@ -196,3 +196,5 @@ Get-FileHash .\sqlmigrate-0.1.43-portable.zip -Algorithm SHA256
 [검토 자료 ZIP](reviews/postgresql-master-ddl-903ce58.zip)을 내려받아 압축 해제 후 `review.html`을 여세요. 공식 master 커밋 903ce587의 객체 정의 중심 33개 파일에서 CREATE 입력 3,033개를 추출해 0.1.43 PG18 규칙으로 정적 분석했습니다. 원본은 20devel이므로 PG20 지원 인증이 아닙니다. 대상 DB에서 SQL을 실행하지 않았습니다.
 
 MANUAL 2,314건·37종 규칙은 공식 GOLDILOCKS 26c.1 매뉴얼과 재대조하고 문장별 CSV와 근거 링크를 제공합니다. SCHEMA·IDENTITY 지원 근거와 DB 링크 설명 오진을 분리했습니다. 공유 분석 설정 누출을 피하기 위해 입력마다 설정을 격리했고, SQL BEGIN ATOMIC 추출 경계 12개를 검토 도구에서 보정했습니다. 제품 엔진의 관련 문제는 수정하지 않았으며 자동 분류가 DB 실행 성공을 뜻하지 않습니다. 원본·저작권·SHA256·변환 SQL·HTML/XLSX/CSV를 포함합니다.
+
+개발 빌드/패키징 시 로컬 `src/dist`의 이전 버전 산출물을 정리합니다. 이번 배포는 동일한 0.1.43 변환 엔진이며 정리 절차와 현재 버전 배포 테스트를 보강했습니다. JRE8 ZIP/TAR.GZ 실행·보고서 재생성을 확인했습니다.
