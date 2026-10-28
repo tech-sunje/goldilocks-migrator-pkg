@@ -190,3 +190,9 @@ Get-FileHash .\sqlmigrate-0.1.43-portable.zip -Algorithm SHA256
 0.1.42: Altibase INSERT의 빈 문자열을 자동 호환으로 분류합니다. BIGINT 정수 문자열 리터럴은 명시적 CAST로 자동 변환하며, 잘못된 정수와 64비트 범위 초과는 검토 대상으로 유지합니다.
 
 0.1.43: Altibase ALTER SESSION SET AUTOCOMMIT = TRUE/FALSE를 gsql SET AUTOCOMMIT ON/OFF로 자동 변환합니다. 주석과 뒤따르는 SQL은 보존합니다.
+
+### PostgreSQL master 객체 생성 SQL 검토 자료
+
+[검토 자료 ZIP](reviews/postgresql-master-ddl-903ce58.zip)을 내려받아 압축 해제 후 `review.html`을 여세요. 공식 master 커밋 903ce587의 객체 정의 중심 33개 파일에서 CREATE 입력 3,033개를 추출해 0.1.43 PG18 규칙으로 정적 분석했습니다. 원본은 20devel이므로 PG20 지원 인증이 아닙니다. 대상 DB에서 SQL을 실행하지 않았습니다.
+
+MANUAL 2,314건·37종 규칙은 공식 GOLDILOCKS 26c.1 매뉴얼과 재대조하고 문장별 CSV와 근거 링크를 제공합니다. SCHEMA·IDENTITY 지원 근거와 DB 링크 설명 오진을 분리했습니다. 공유 분석 설정 누출을 피하기 위해 입력마다 설정을 격리했고, SQL BEGIN ATOMIC 추출 경계 12개를 검토 도구에서 보정했습니다. 제품 엔진의 관련 문제는 수정하지 않았으며 자동 분류가 DB 실행 성공을 뜻하지 않습니다. 원본·저작권·SHA256·변환 SQL·HTML/XLSX/CSV를 포함합니다.
