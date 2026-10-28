@@ -1,4 +1,4 @@
-source_commit=04190c1234df08e9509127ffacbe8496d11c70a4
-built_at_utc=2026-10-28T02:57:33Z
+source_commit=28c3dd1ac05155971dd823207d644851206e8d80
+built_at_utc=2026-10-28T03:25:40Z
 runtime=Java 8+
-version=0.1.43
+version=0.1.44

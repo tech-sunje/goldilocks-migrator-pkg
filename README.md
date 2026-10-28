@@ -2,7 +2,7 @@
 
 Altibase / Oracle / PostgreSQL의 SQL을 **GOLDILOCKS용 SQL 초안으로 분석·변환**하는 도구입니다.
 
-**현재 버전: 0.1.43 · 실행 환경: Java 8 이상(JRE)**
+**현재 버전: 0.1.44 · 실행 환경: Java 8 이상(JRE)**
 
 이 저장소는 실행 패키지와 설명서를 공개 배포하는 용도입니다. 프로그램 개발 소스와 비공개 소스 저장소의 Git 이력은 포함하지 않습니다. 패키지의 `source/` 폴더에는 변환을 시험할 수 있는 **SQL 입력 예제**가 들어 있습니다.
 
@@ -12,13 +12,21 @@ GitHub 로그인 없이 아래 링크로 다운로드할 수 있습니다.
 
 | 파일 | 용도 |
 | --- | --- |
-| [sqlmigrate-0.1.43-portable.zip](https://github.com/tech-sunje/goldilocks-migrator-pkg/raw/refs/heads/main/sqlmigrate-0.1.43-portable.zip) | Windows 및 공통 배포 ZIP |
-| [sqlmigrate-0.1.43-linux.tar.gz](https://github.com/tech-sunje/goldilocks-migrator-pkg/raw/refs/heads/main/sqlmigrate-0.1.43-linux.tar.gz) | Linux 배포 압축파일 |
-| [ZIP SHA-256](sqlmigrate-0.1.43-portable.zip.sha256) | ZIP 무결성 확인 |
-| [TAR.GZ SHA-256](sqlmigrate-0.1.43-linux.tar.gz.sha256) | TAR.GZ 무결성 확인 |
+| [sqlmigrate-0.1.44-portable.zip](https://github.com/tech-sunje/goldilocks-migrator-pkg/raw/refs/heads/main/sqlmigrate-0.1.44-portable.zip) | Windows 및 공통 배포 ZIP |
+| [sqlmigrate-0.1.44-linux.tar.gz](https://github.com/tech-sunje/goldilocks-migrator-pkg/raw/refs/heads/main/sqlmigrate-0.1.44-linux.tar.gz) | Linux 배포 압축파일 |
+| [ZIP SHA-256](sqlmigrate-0.1.44-portable.zip.sha256) | ZIP 무결성 확인 |
+| [TAR.GZ SHA-256](sqlmigrate-0.1.44-linux.tar.gz.sha256) | TAR.GZ 무결성 확인 |
 | [SHA256SUMS](SHA256SUMS) | 두 압축파일의 SHA-256 목록 |
 
 압축파일을 **해제한 후** 실행하십시오. 실행에 별도 JDK, Node.js 또는 Python은 필요하지 않습니다.
+
+## 0.1.44 변경 사항
+
+- Oracle CREATE/ALTER AUDIT POLICY와 AUDIT/NOAUDIT POLICY의 확인한 공통 절을 호환 처리합니다. 감사 조건·권한 범위가 다른 옵션은 제거하지 않고 근거와 위치를 표시합니다.
+- Oracle CREATE/ALTER PROFILE의 비밀번호 기간·횟수·잠금·재사용 공통 옵션을 처리합니다. 소수 일수는 정확한 분수로 변환하고 자원 제한·사용자 정의 검증 함수는 별도 검토합니다.
+- PG 행 보안 정책과 감사 정책을 혼동하지 않습니다. 실제 DROP 안전 차단은 유지합니다.
+- 매뉴얼 비교 및 제한사항: [감사 정책·PROFILE 지원 범위](docs/ORACLE_SECURITY_POLICY.md).
+- 전체 정적 회귀 및 JRE8 ZIP/TAR.GZ 실행을 확인했습니다. 실제 DB 보안 정책 동작은 미검증입니다.
 
 ## 0.1.43 변경 사항
 
@@ -52,7 +60,7 @@ java -jar sqlmigrate.jar web
 ### Linux
 
 ```sh
-tar -xzf sqlmigrate-0.1.43-linux.tar.gz
+tar -xzf sqlmigrate-0.1.44-linux.tar.gz
 cd sqlmigrate-0.1.43
 sh run.sh web
 ```
@@ -168,14 +176,14 @@ Linux에서는 `sh run.sh review --config migrate.ini`도 사용할 수 있습�
 Linux에서는 내려받은 파일과 체크섬 파일을 같은 폴더에 두고 실행합니다.
 
 ```sh
-sha256sum -c sqlmigrate-0.1.43-portable.zip.sha256
-sha256sum -c sqlmigrate-0.1.43-linux.tar.gz.sha256
+sha256sum -c sqlmigrate-0.1.44-portable.zip.sha256
+sha256sum -c sqlmigrate-0.1.44-linux.tar.gz.sha256
 ```
 
 Windows PowerShell에서는 다음 값과 체크섬 파일의 값을 비교합니다.
 
 ```powershell
-Get-FileHash .\sqlmigrate-0.1.43-portable.zip -Algorithm SHA256
+Get-FileHash .\sqlmigrate-0.1.44-portable.zip -Algorithm SHA256
 ```
 
 ## 7. 사용 범위
@@ -197,4 +205,4 @@ Get-FileHash .\sqlmigrate-0.1.43-portable.zip -Algorithm SHA256
 
 MANUAL 2,314건·37종 규칙은 공식 GOLDILOCKS 26c.1 매뉴얼과 재대조하고 문장별 CSV와 근거 링크를 제공합니다. SCHEMA·IDENTITY 지원 근거와 DB 링크 설명 오진을 분리했습니다. 공유 분석 설정 누출을 피하기 위해 입력마다 설정을 격리했고, SQL BEGIN ATOMIC 추출 경계 12개를 검토 도구에서 보정했습니다. 제품 엔진의 관련 문제는 수정하지 않았으며 자동 분류가 DB 실행 성공을 뜻하지 않습니다. 원본·저작권·SHA256·변환 SQL·HTML/XLSX/CSV를 포함합니다.
 
-개발 빌드/패키징 시 로컬 `src/dist`의 이전 버전 산출물을 정리합니다. 이번 배포는 동일한 0.1.43 변환 엔진이며 정리 절차와 현재 버전 배포 테스트를 보강했습니다. JRE8 ZIP/TAR.GZ 실행·보고서 재생성을 확인했습니다.
+개발 빌드/패키징 시 로컬 `src/dist`의 이전 버전 산출물을 정리합니다. 이전 0.1.43 배포에서 정리 절차와 현재 버전 배포 테스트를 보강했습니다. JRE8 ZIP/TAR.GZ 실행·보고서 재생성을 확인했습니다.
