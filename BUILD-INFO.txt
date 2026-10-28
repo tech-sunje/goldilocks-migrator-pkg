@@ -1,0 +1,4 @@
+source_commit=9a1bbe2c8b726ac9de3edeca808ea6c724833d9b
+built_at_utc=2026-10-28T00:40:17Z
+runtime=Java 8+
+version=0.1.41

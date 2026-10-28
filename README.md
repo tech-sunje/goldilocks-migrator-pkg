@@ -2,7 +2,7 @@
 
 Altibase / Oracle / PostgreSQL의 SQL을 **GOLDILOCKS용 SQL 초안으로 분석·변환**하는 도구입니다.
 
-**현재 버전: 0.1.34 · 실행 환경: Java 8 이상(JRE)**
+**현재 버전: 0.1.41 · 실행 환경: Java 8 이상(JRE)**
 
 이 저장소는 실행 패키지와 설명서를 공개 배포하는 용도입니다. 프로그램 개발 소스와 비공개 소스 저장소의 Git 이력은 포함하지 않습니다. 패키지의 `source/` 폴더에는 변환을 시험할 수 있는 **SQL 입력 예제**가 들어 있습니다.
 
@@ -12,13 +12,23 @@ GitHub 로그인 없이 아래 링크로 다운로드할 수 있습니다.
 
 | 파일 | 용도 |
 | --- | --- |
-| [sqlmigrate-0.1.34-portable.zip](https://github.com/tech-sunje/goldilocks-migrator-pkg/raw/refs/heads/main/sqlmigrate-0.1.34-portable.zip) | Windows 및 공통 배포 ZIP |
-| [sqlmigrate-0.1.34-linux.tar.gz](https://github.com/tech-sunje/goldilocks-migrator-pkg/raw/refs/heads/main/sqlmigrate-0.1.34-linux.tar.gz) | Linux 배포 압축파일 |
-| [ZIP SHA-256](sqlmigrate-0.1.34-portable.zip.sha256) | ZIP 무결성 확인 |
-| [TAR.GZ SHA-256](sqlmigrate-0.1.34-linux.tar.gz.sha256) | TAR.GZ 무결성 확인 |
+| [sqlmigrate-0.1.41-portable.zip](https://github.com/tech-sunje/goldilocks-migrator-pkg/raw/refs/heads/main/sqlmigrate-0.1.41-portable.zip) | Windows 및 공통 배포 ZIP |
+| [sqlmigrate-0.1.41-linux.tar.gz](https://github.com/tech-sunje/goldilocks-migrator-pkg/raw/refs/heads/main/sqlmigrate-0.1.41-linux.tar.gz) | Linux 배포 압축파일 |
+| [ZIP SHA-256](sqlmigrate-0.1.41-portable.zip.sha256) | ZIP 무결성 확인 |
+| [TAR.GZ SHA-256](sqlmigrate-0.1.41-linux.tar.gz.sha256) | TAR.GZ 무결성 확인 |
 | [SHA256SUMS](SHA256SUMS) | 두 압축파일의 SHA-256 목록 |
 
 압축파일을 **해제한 후** 실행하십시오. 실행에 별도 JDK, Node.js 또는 Python은 필요하지 않습니다.
+
+## 0.1.41 변경 사항
+
+- REM/REMARK·PROMPT·SQL*Plus 전용 SET을 행 주석으로 자동 처리합니다.
+- GROUPING SETS·IDENTITY·암시적 커서 FOR 및 내장 기본값의 인식을 보강했습니다.
+- 이름 없는 UNIQUE는 호환으로 분류하고, 동적 SQL 내용 확인과 실행 불가 판정을 구분합니다.
+- 숫자 문자열 연결과 날짜/숫자 연산의 오진을 수정했습니다. AUTONOMOUS_TRANSACTION은 검증 대상에서 구문 오류가 확인돼 수동 검토로 유지합니다.
+- 입력변환에 전체 건수·자동변환(호환) 비율을 표시하고 실제 문제 행의 원문/변환 강조를 보정했습니다.
+
+배포 기준 소스 커밋과 빌드 정보는 [BUILD-INFO.txt](BUILD-INFO.txt)에 기록합니다. 기존 프로그램을 종료하고 새 패키지로 실행하십시오.
 
 ## 1. 실행
 
@@ -42,8 +52,8 @@ java -jar sqlmigrate.jar web
 ### Linux
 
 ```sh
-tar -xzf sqlmigrate-0.1.34-linux.tar.gz
-cd sqlmigrate-0.1.34
+tar -xzf sqlmigrate-0.1.41-linux.tar.gz
+cd sqlmigrate-0.1.41
 sh run.sh web
 ```
 
@@ -158,14 +168,14 @@ Linux에서는 `sh run.sh review --config migrate.ini`도 사용할 수 있습�
 Linux에서는 내려받은 파일과 체크섬 파일을 같은 폴더에 두고 실행합니다.
 
 ```sh
-sha256sum -c sqlmigrate-0.1.34-portable.zip.sha256
-sha256sum -c sqlmigrate-0.1.34-linux.tar.gz.sha256
+sha256sum -c sqlmigrate-0.1.41-portable.zip.sha256
+sha256sum -c sqlmigrate-0.1.41-linux.tar.gz.sha256
 ```
 
 Windows PowerShell에서는 다음 값과 체크섬 파일의 값을 비교합니다.
 
 ```powershell
-Get-FileHash .\sqlmigrate-0.1.34-portable.zip -Algorithm SHA256
+Get-FileHash .\sqlmigrate-0.1.41-portable.zip -Algorithm SHA256
 ```
 
 ## 7. 사용 범위
